@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title
+      | Oshikatsu
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application"
+  body
+    header 
+      .app_title-navbar-expand-md.navbar-light.bg-light 
+        .navbar-brand Oshikatsu 
+      .container
+      .nav.justify-content-end
+        -if user_signed_in? 
+          div class="d-grid gap-2 d-md-flex justify-content-md-end"
+            = button_to 'プロフィール変更', edit_user_registration_path, {method: :get, class: 'btn btn-outline-primary me-md-2'}
+            = button_to 'ログアウト', destroy_user_session_path, {method: :delete, class: 'btn btn-outline-danger'} 
+        -else 
+          = link_to 'サインアップ', new_user_registration_path 
+          = link_to 'ログイン', new_user_session_path 
+    /header
+    .container
+      - if flash.notice.present?
+        .alert.alert-success= flash.notice
+      = yield

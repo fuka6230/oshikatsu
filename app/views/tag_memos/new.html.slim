@@ -1,0 +1,10 @@
+h1 タグの新規登録
+
+.nav.justify-content-end 
+  = link_to 'メモ用タグ一覧', tag_memos_path, class: 'nav-link'
+
+= form_with model: @memo_tag, local: true do |f|
+  .form-group 
+    = f.label :name
+    = f.text_field :name, class: 'form-control', id: 'tag_name'
+  = f.submit nil, class: 'btn btn-primary'

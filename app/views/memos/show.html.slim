@@ -1,0 +1,22 @@
+h1 詳細
+
+.nav.justfy-content-end 
+ = link_to 'メモ一覧', memos_path, class: 'nav-link'
+ table.table.table-hover 
+  tbody 
+    tr 
+      th= Memo.human_attribute_name(:name)
+      td= @memo.name
+    tr 
+      th= Memo.human_attribute_name(:desctription)
+      td= @memo.description
+    tr
+      th= Memo.human_attribute_name(:tag)
+      td= @memo.tag
+    tr 
+      th= Memo.human_attribute_name(:image)
+      -if @memo.image.attached?
+        td= image_tag @memo.image
+
+= link_to '編集', edit_memo_path, class: 'btn btn-primary'
+= button_to '削除', @memo, method: :delete, data: {confirm: "削除します。よろしいですか？" } ,class: 'btn btn-danger'

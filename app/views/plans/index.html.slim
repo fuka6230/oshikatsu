@@ -1,0 +1,19 @@
+= search_form_for @q, class: 'mb-5' do |f|
+  .form-group.row.mb-3
+    = f.label :tag_cont, 'タグで絞り込む', class: 'col-sm-2 col-form-label col-form-label'
+    .col-sm-10
+      = f.collection_select :tag_eq, Plan.select(:tag).distinct, :tag, :tag, class: 'form-control-sm search-select-box'
+  .form-group 
+    = f.submit class: 'btn btn-primary'
+    = link_to '絞り込み解除', plans_path, method: :get, class: 'btn btn-danger' 
+
+.container
+  = month_calendar(events: @plans) do |date, plans| 
+    = date.day
+
+    - plans.each do |plan|
+      p= link_to plan.name, plan
+
+= link_to '新規登録', new_plan_path, class: 'btn btn-primary'
+= link_to 'メモ一覧へ', memos_path, class: 'nav-link'
+      

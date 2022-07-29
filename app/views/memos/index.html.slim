@@ -1,0 +1,15 @@
+h1 メモ一覧
+= link_to 'メモの新規登録', new_memo_path, class: 'btn btn-primary'
+
+.container
+  table.table.table-hover 
+    thead.thead-default 
+      th= Memo.human_attribute_name(:name)
+      th= Memo.human_attribute_name(:description)
+    tbody
+      - @memos.each do |memo|
+        tr
+          td= link_to memo.name, memo
+          td= memo.description
+
+= link_to 'スケジュールへ', plans_path

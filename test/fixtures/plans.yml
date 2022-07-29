@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  plan_at: 2022-06-07 18:52:30
+  tag: MyString
+
+two:
+  name: MyString
+  description: MyText
+  plan_at: 2022-06-07 18:52:30
+  tag: MyString

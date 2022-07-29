@@ -1,0 +1,12 @@
+h1 タグ一覧
+= link_to '前の画面に戻る', :back, class:'back-btn'
+= link_to 'タグの新規登録', new_tag_path, class: 'btn btn-primary'
+
+table.table.table-hover 
+  thead.thead-default 
+    tr= Tag.human_attribute_name(:name)
+  tbody
+    - @tags.each do |tag|
+      tr
+        td= tag.name
+      td= button_to '削除', tag, method: :delete, class: 'btn btn-danger'

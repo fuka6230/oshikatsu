@@ -1,0 +1,18 @@
+= form_with model: memo, local: true do |f|
+  .form-group 
+    = f.label :name
+    = f.text_field :name, class: 'form-control', id: 'memo_name'
+  .form-group 
+    = f.label :description
+    = f.text_area :description, rows: 5, class: 'form-control', id: 'memo_description'
+  .form-group 
+    = f.label :tag_memo_id
+    = f.select(:tag_memo_id, @tag_memo_names)
+    = link_to 'タグ一覧', tag_for_memos_path, class: 'nav-link'
+  .form-group 
+    = f.label :image
+    = f.file_field :image, class: 'form-control'
+  = f.submit nil, class: 'btn btn-primary'
+
+-if @memo.image.attached?
+  = image_tag @memo.image.representation(resize_to_limit: [100, 100])
