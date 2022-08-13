@@ -9,7 +9,7 @@ class MemosController < ApplicationController
 
   def new
     @memo = Memo.new
-    @tag_memo_names = current_user.tag_for_memos.pluck(:name)
+    @tag_memo_names = current_user.tag_memos.pluck(:name)
   end
 
   def create
