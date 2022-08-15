@@ -1,10 +1,11 @@
 class MemosController < ApplicationController
+  before_action :set_memo, only: [:show, :edit]
+
   def index
     @memos = current_user.memos
   end
 
   def show
-    @memo = current_user.memos.find(params[:id])
   end
 
   def new
@@ -22,7 +23,6 @@ class MemosController < ApplicationController
   end   
 
   def edit
-    @memo = current_user.memos.find(params[:id])
   end
   
   def update
@@ -41,5 +41,9 @@ class MemosController < ApplicationController
 
   def memo_params
     params.require(:memo).permit(:name, :description, :tag, :image)
+  end
+
+  def set_memo
+    @memo = current_user.memos.find(params[:id])
   end
 end

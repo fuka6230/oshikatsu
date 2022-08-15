@@ -1,11 +1,11 @@
 class PlansController < ApplicationController
+  before_action :set_plan, only: [show, edit]
   def index
     @q = current_user.plans.ransack(params[:q])
     @plans = @q.result(distinct: true)
   end
 
   def show
-    @plan = current_user.plans.find(params[:id])
   end
 
   def new
@@ -14,7 +14,6 @@ class PlansController < ApplicationController
   end
 
   def edit
-    @plan = current_user.plans.find(params[:id])
     @tag_names = current_user.tags.pluck(:name)
   end
 
@@ -43,5 +42,9 @@ class PlansController < ApplicationController
 
   def plan_params
     params.require(:plan).permit(:name, :description, :start_time, :end_time, :tag)
+  end
+
+  def set_plan
+    @plan = current_user.plans.find(params[:id])
   end
 end
