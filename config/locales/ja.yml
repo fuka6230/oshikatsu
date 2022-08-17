@@ -13,7 +13,7 @@ ja:
       plan:
         id: ID
         name: タイトル
-        description: 詳しい内容
+        description: 詳細
         start_time: 開始日時
         end_time: 終了日時
         tag: タグ

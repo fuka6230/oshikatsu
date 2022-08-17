@@ -18,5 +18,5 @@ h1 詳細
       -if @memo.image.attached?
         td= image_tag @memo.image
 
-= link_to '編集', edit_memo_path, class: 'btn btn-primary'
-= button_to '削除', @memo, method: :delete, data: {confirm: "削除します。よろしいですか？" } ,class: 'btn btn-danger'
+= link_to '編集', edit_memo_path, class: 'btn btn-outline-primary col-4'
+= button_to '削除', @memo, method: :delete ,class: 'btn btn-outline-danger col-4'

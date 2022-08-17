@@ -5,6 +5,11 @@ class MemosController < ApplicationController
     @memos = current_user.memos
   end
 
+  def to_index
+    redirect_to :action => :index
+  end
+  
+
   def show
   end
 
@@ -16,13 +21,14 @@ class MemosController < ApplicationController
   def create
     @memo = current_user.memos.new(memo_params)
     if @memo.save
-        redirect_to memos_url, notice: "「#{@memo.name}」を登録しました。"
+        redirect_to @memo, notice: "「#{@memo.name}」を登録しました。"
     else
       render :new
     end
   end   
 
   def edit
+    @tag_memo_names = current_user.tag_memos.pluck(:name)
   end
   
   def update
@@ -40,7 +46,7 @@ class MemosController < ApplicationController
   private
 
   def memo_params
-    params.require(:memo).permit(:name, :description, :tag, :image)
+    params.require(:memo).permit(:name, :description, :tag, :image, :tag_memo_id)
   end
 
   def set_memo

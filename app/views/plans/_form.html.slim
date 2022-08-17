@@ -12,10 +12,10 @@
     = f.text_area :description, rows: 5, class: 'form-control', id: 'plan_description'
   .form-group
     = f.label :start_time
-    = f.datetime_field :start_time, class: 'form-control', id: 'plan_start_time'
+    = f.datetime_field :start_time, class: 'form-control', id: 'plan_start_time', value: Time.current.beginning_of_day.strftime('%Y-%m-%dT%T')
   .form-group
     = f.label :end_time
-    = f.datetime_field :end_time, class: 'form-control', id: 'plan_end_time'
+    = f.datetime_field :end_time, class: 'form-control', id: 'plan_end_time', value: Time.current.beginning_of_day.strftime('%Y-%m-%dT%T')
   .form-group 
     = f.label :tag
     = f.select(:tag, @tag_names)

@@ -1,10 +1,14 @@
 class PlansController < ApplicationController
-  before_action :set_plan, only: [show, edit]
+  before_action :set_plan, only: [:show, :edit]
   def index
     @q = current_user.plans.ransack(params[:q])
     @plans = @q.result(distinct: true)
   end
 
+  def to_index
+    redirect_to :action => :index
+  end
+  
   def show
   end
 

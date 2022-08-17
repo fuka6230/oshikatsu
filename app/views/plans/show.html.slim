@@ -1,4 +1,4 @@
-h1 詳細
+h1= @plan.name
 
 .nav.justfy-content-end 
  = link_to '一覧に戻る', plans_path, class: 'nav-link'
@@ -8,7 +8,7 @@ h1 詳細
       th= Plan.human_attribute_name(:name)
       td= @plan.name
     tr 
-      th= Plan.human_attribute_name(:desctription)
+      th= Plan.human_attribute_name(:description)
       td= @plan.description
     tr 
       th= Plan.human_attribute_name(:start_time)
@@ -24,7 +24,5 @@ h1 詳細
       th= Plan.human_attribute_name(:tag)
       td= @plan.tag
 
-= link_to '編集', edit_plan_path, class: 'btn btn-primary'
-= button_to '削除', @plan, method: :delete, class: 'btn btn-danger', form: {data: {turbo_confirm: "削除します。よろしいですか？" }}
-//= form_with(scope: @plan, url: plan_path,method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you Sure?" }) do |f|
-//  = f.submit :button, value: 'Destroy', class: "btn btn-danger"
+= link_to '編集', edit_plan_path, class: 'btn btn-outline-primary'
+= button_to '削除', @plan, method: :delete, class: 'btn btn-outline-danger', form: {data: {turbo_confirm: "削除します。よろしいですか？" }}

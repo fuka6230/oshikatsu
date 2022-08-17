@@ -1,5 +1,4 @@
 h1 メモ一覧
-= link_to 'メモの新規登録', new_memo_path, class: 'btn btn-primary'
 
 .container
   table.table.table-hover 
@@ -12,4 +11,4 @@ h1 メモ一覧
           td= link_to memo.name, memo
           td= memo.description
 
-= link_to 'スケジュールへ', plans_path
+= link_to 'メモの新規登録', new_memo_path, class: 'btn btn-outline-primary'
