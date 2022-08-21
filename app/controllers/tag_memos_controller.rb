@@ -1,7 +1,11 @@
 class TagMemosController < ApplicationController
 
   def index
-    @memo_tags = current_user.tag_memos
+    begin
+      @memo_tags = current_user.tag_memos
+    rescue
+      @memo_tags = :no_tags
+    end
   end
   
   def new
