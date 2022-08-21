@@ -15,8 +15,10 @@ class MemosController < ApplicationController
 
   def new
     @memo = Memo.new
-    if current_user.tag_memos.present?
+    begin
       @tag_memo_names = current_user.tag_memos.pluck(:name)
+    rescue 
+      @tag_memo_names = nil
     end
   end
 
