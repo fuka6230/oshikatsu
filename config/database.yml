@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: oshikatsu_production
-  username: oshikatsu
-  password: <%= ENV["OSHIKATSU_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
