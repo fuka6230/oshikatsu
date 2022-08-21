@@ -15,7 +15,7 @@ class MemosController < ApplicationController
 
   def new
     @memo = Memo.new
-    if current_user.tag_memos.exists?
+    if current_user.tag_memos.present?
       @tag_memo_names = current_user.tag_memos.pluck(:name)
     end
   end
