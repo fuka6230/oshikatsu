@@ -7,7 +7,10 @@
     = f.text_area :description, rows: 5, class: 'form-control', id: 'memo_description'
   .form-group 
     = f.label :tag_memo_id
-    = f.select(:tag_memo_id, @tag_memo_names)
+    -if @tag_memo_names == :no_tags
+      = f.select(:tag_memo_id, @tag_memo_names)
+    -else
+      = f.select(:tag_memo_id)
     = link_to 'タグ一覧', tag_memos_path, class: 'nav-link'
   .form-group 
     = f.label :image

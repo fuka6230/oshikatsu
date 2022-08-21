@@ -18,7 +18,7 @@ class MemosController < ApplicationController
     begin
       @tag_memo_names = current_user.tag_memos.pluck(:name)
     rescue 
-      @tag_memo_names = nil
+      @tag_memo_names = :no_tags
     end
   end
 
