@@ -18,11 +18,8 @@ html
           div class="d-grid gap-2 d-md-flex justify-content-md-end"
             = button_to 'プロフィール変更', edit_user_registration_path, {method: :get, class: 'btn btn-primary me-md-2'}
             = button_to 'ログアウト', destroy_user_session_path, {method: :delete, class: 'btn btn-danger me-md-2'} 
-            = button_to 'メモ一覧へ', to_index_memos_path, class: 'btn btn-success me-md-2'
+            = button_to 'メモ一覧へ', to_index_memos_path(@current_user), class: 'btn btn-success me-md-2'
             = button_to '予定一覧へ', to_index_plans_path, class: 'btn btn-success me-md-2'
-        -else 
-          = button_to 'アカウント登録', new_user_registration_path 
-          = button_to 'ログイン', new_user_session_path 
 
     .container
       - if flash.notice.present?

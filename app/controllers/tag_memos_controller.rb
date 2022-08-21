@@ -26,6 +26,6 @@ class TagMemosController < ApplicationController
   private
 
   def memo_tag_params
-    params.require(:tag_memo).permit(:name)
+    params.require(:tag_memo, :name)
   end
 end

@@ -14,5 +14,6 @@
     = f.file_field :image, class: 'form-control'
   = f.submit nil, class: 'btn btn-primary'
 
+.h5 画像のプレビュー
 -if @memo.image.attached?
-  = image_tag @memo.image.representation(resize_to_limit: [100, 100])
+  = image_tag @memo.image
