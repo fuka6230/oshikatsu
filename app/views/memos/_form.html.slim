@@ -9,8 +9,6 @@
     = f.label :tag_memo_id
     -if @tag_memo_names != :no_tags
       = f.select(:tag_memo_id, @tag_memo_names)
-    -else
-      = f.select(:tag_memo_id)
     = link_to 'タグ一覧', tag_memos_path, class: 'nav-link'
   .form-group 
     = f.label :image
