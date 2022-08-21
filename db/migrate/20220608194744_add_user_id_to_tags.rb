@@ -1,4 +1,3 @@
-
 class AddUserIdToTags < ActiveRecord::Migration[7.0]
   def up
     execute 'DELETE FROM tags;'

@@ -65,11 +65,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_075216) do
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
+  create_table "tag_for_memos", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tag_memos", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.index ["name"], name: "index_tag_memos_on_name", unique: true
   end
 
   create_table "tags", force: :cascade do |t|
