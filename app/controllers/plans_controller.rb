@@ -1,5 +1,7 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: [:show, :edit]
+  skip_before_action :check_logged_in, only: :index
+  
   def index
     @q = current_user.plans.ransack(params[:q])
     @plans = @q.result(distinct: true)
@@ -14,7 +16,11 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-    @tag_names = current_user.tags.pluck(:name) 
+    begin
+      @tag_names = current_user.tags.pluck(:name) 
+    rescue
+      @tag_names = :no_tags
+    end
   end
 
   def edit
@@ -35,10 +41,14 @@ class PlansController < ApplicationController
 
   def create
     @plan = current_user.plans.new(plan_params)
-    if @plan.save
-        redirect_to @plan, notice: "「#{@plan.name}」を登録しました。"
+    if @plan.name.blank?
+      redirect_to ({action: :new}), alert: "タイトルは必須項目です。"
     else
-      render :new
+      if @plan.save
+          redirect_to @plan, notice: "「#{@plan.name}」を登録しました。"
+      else
+        redirect_to ({action: :new}), alert: "エラーが発生しました。"
+      end
     end
   end
 

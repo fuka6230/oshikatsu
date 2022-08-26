@@ -6,7 +6,7 @@ class MemosController < ApplicationController
   end
 
   def to_index
-    redirect_to :action => :index
+    redirect_to action: :index
   end
   
 
@@ -15,19 +15,19 @@ class MemosController < ApplicationController
 
   def new
     @memo = Memo.new
-    begin
-      @tag_memo_names = current_user.tag_memos.pluck(:name)
-    rescue 
-      @tag_memo_names = :no_tags
-    end
+    @tag_memo_names = current_user.tag_memos.pluck(:name)
   end
 
   def create
     @memo = current_user.memos.new(memo_params)
-    if @memo.save
-        redirect_to @memo, notice: "「#{@memo.name}」を登録しました。"
+    if @memo.name.blank?
+      redirect_to ({action: :new}), alert: "タイトルは必須項目です。"
     else
-      render :new
+      if @memo.save
+        redirect_to @memo, notice: "「#{@memo.name}」を登録しました。"
+       else
+        redirect_to ({action: :new}), alert: "エラーが発生しました。"
+       end      
     end
   end   
 
@@ -50,7 +50,7 @@ class MemosController < ApplicationController
   private
 
   def memo_params
-    params.require(:memo).permit(:name, :description, :tag, :image, :tag_memo_id)
+    params.require(:memo).permit(:name, :description, :tag_memo, :image)
   end
 
   def set_memo

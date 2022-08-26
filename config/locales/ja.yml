@@ -10,6 +10,7 @@ ja:
     models:
       plan: 予定
       memo: メモ
+      tag_memo: メモ用タグ
     attributes:
       plan:
         id: ID
@@ -24,8 +25,10 @@ ja:
         name: タイトル
         desctription: 詳細
         description: 詳細
-        tag: タグ
+        tag_memo: メモ用タグ
         image: 画像
+      tag_memo:
+        name: タグ名
   date:
     abbr_day_names:
     - 日

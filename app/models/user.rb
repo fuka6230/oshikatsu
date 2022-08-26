@@ -1,10 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :lockable, :timeoutable, :trackable, :omniauthable, omniauth_providers:[:twitter]
-
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
       user.provider = auth["provider"]
@@ -27,4 +21,23 @@ class User < ApplicationRecord
   has_many :tags
   has_many :memos
   has_many :tag_memos
+
+  class << self
+    def find_or_create_from_auth_hash(auth_hash)
+      user_params = user_params_from_auth_hash(auth_hash)
+      find_or_create_by(email: user_params[:email]) do |user|
+        user.update(user_params)
+      end
+    end
+    
+    private
+
+    def user_params_from_auth_hash(auth_hash)
+      {
+        name: auth_hash.info.name,
+        email: auth_hash.info.email,
+        image: auth_hash.info.image,
+      }
+    end
+  end
 end

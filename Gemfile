@@ -55,8 +55,7 @@ gem 'rails-i18n'
 
 gem 'bootstrap'
 
-gem 'devise'
-gem 'devise-i18n'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'omniauth-rails_csrf_protection'
 

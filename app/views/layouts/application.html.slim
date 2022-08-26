@@ -14,14 +14,18 @@ html
         .navbar-brand Oshikatsu 
       .container
       .nav.justify-content-end
-        -if user_signed_in? 
+        - if current_user
           div class="d-grid gap-2 d-md-flex justify-content-md-end"
-            = button_to 'プロフィール変更', edit_user_registration_path, {method: :get, class: 'btn btn-primary me-md-2'}
-            = button_to 'ログアウト', destroy_user_session_path, {method: :delete, class: 'btn btn-danger me-md-2'} 
-            = button_to 'メモ一覧へ', to_index_memos_path(@current_user), class: 'btn btn-success me-md-2'
-            = button_to '予定一覧へ', to_index_plans_path, class: 'btn btn-success me-md-2'
+          =button_to "ログアウト", log_out_path, method: :get, class: 'btn btn-danger me-md-2'
+          = button_to 'メモ一覧へ', to_index_memos_path(@current_user), class: 'btn btn-success me-md-2'
+          = button_to '予定一覧へ', to_index_plans_path, class: 'btn btn-success me-md-2'
+        - else
+          div class="d-grid gap-2 d-md-flex justify-content-md-end"   
+          = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }, class: 'btn btn-primary me-md-2'
 
     .container
       - if flash.notice.present?
         .alert.alert-success= flash.notice
+      - if flash.alert.present?
+        .alert.alert-danger= flash.alert
       = yield

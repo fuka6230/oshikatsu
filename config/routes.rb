@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbacks", :registrations_controller => "users/registrations_controller" }
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'log_out', to: 'sessions#destroy', as: 'log_out'
+
+  resources :sessions, only: %i[create destroy]
  
   
   resources :tags
@@ -14,6 +18,6 @@ Rails.application.routes.draw do
       post :to_index, action: :to_index
     end
   end
-  root to: 'plans#index'
+  root to: 'sessions#home'
 end
 

@@ -11,8 +11,8 @@ h1 詳細
       th= Memo.human_attribute_name(:desctription)
       td= @memo.description
     tr
-      th= Memo.human_attribute_name(:tag)
-      td= @memo.tag
+      th= Memo.human_attribute_name(:tag_memo)
+      td= @memo.tag_memo
     tr 
       th= Memo.human_attribute_name(:image)
       -if @memo.image.attached?
