@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  has_many :plans
+  has_many :tags
+  has_many :memos
+  has_many :tag_memos
+
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
       user.provider = auth["provider"]
@@ -17,11 +22,6 @@ class User < ApplicationRecord
     end
   end
 
-  has_many :plans
-  has_many :tags
-  has_many :memos
-  has_many :tag_memos
-
   class << self
     def find_or_create_from_auth_hash(auth_hash)
       user_params = user_params_from_auth_hash(auth_hash)
@@ -34,9 +34,8 @@ class User < ApplicationRecord
 
     def user_params_from_auth_hash(auth_hash)
       {
-        name: auth_hash.info.name,
+        username: auth_hash.info.name,
         email: auth_hash.info.email,
-        image: auth_hash.info.image,
       }
     end
   end

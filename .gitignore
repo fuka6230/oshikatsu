@@ -32,3 +32,5 @@
 /config/devise.rb
 
 /config/credentials/development.key
+
+/config/credentials/production.key
