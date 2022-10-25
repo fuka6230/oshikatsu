@@ -1,3 +1,12 @@
+- @plans.each do |plan|
+  - if plan.countdown && (plan.start_time - DateTime.current).to_i > 0
+    table
+      tbody 
+        tr
+          th #{plan.name} まで...
+          td #{(plan.start_time - DateTime.current).to_i / (24 * 3600)} 日
+          td #{((plan.start_time - DateTime.current).to_i % (24 * 3600)) / 3600} 時間
+          td #{(((plan.start_time - DateTime.current).to_i % (24 * 3600)) % 3600) / 60} 分
 = search_form_for @q, class: 'mb-5' do |f|
   .form-group.row.mb-3
     h5 = f.label :tag_cont, 'タグで絞り込む', class: 'col-sm-2 col-form-label col-form-label'
