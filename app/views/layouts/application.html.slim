@@ -23,10 +23,6 @@ html
           div class="d-grid gap-2 d-md-flex justify-content-md-end"   
           = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }, class: 'btn btn-primary me-md-2'
           = button_to "Twitterでログイン", "/auth/twitter", method: :post, data: { turbo: false }, class: 'btn btn-primary me-md-2'
-
-    .container
-      - if flash.notice.present?
-        .alert.alert-success= flash.notice
-      - if flash.alert.present?
-        .alert.alert-danger= flash.alert
-      = yield
+.container
+    =render 'layouts/flash_message'
+    = yield

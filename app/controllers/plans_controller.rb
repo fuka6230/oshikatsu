@@ -29,8 +29,17 @@ class PlansController < ApplicationController
 
   def update
     plan = current_user.plans.find(params[:id])
-    plan.update!(plan_params)
-    redirect_to plans_url, notice: "「#{plan.name}」を更新しました。"
+    @tag_names = current_user.tags.pluck(:name)
+    if plan.name.blank?
+      flash.now[:alert] = "タイトルは必須項目です。"
+      render action: :new
+    elsif plan.start_time.blank?
+      flash.now[:alert] = "日時は必須項目です。"
+      render action: :new 
+    else  
+      plan.update!(plan_params)
+      redirect_to plans_url, notice: "「#{plan.name}」を更新しました。"
+    end
   end
 
   def destroy
@@ -42,7 +51,9 @@ class PlansController < ApplicationController
   def create
     @plan = current_user.plans.new(plan_params)
     if @plan.name.blank?
-      redirect_to ({action: :new}), alert: "タイトルは必須項目です。"
+      render :new, alert: "タイトルは必須項目です。"
+    elsif @plan.start_time.blank?
+      render action: :new, alert: "日時は必須項目です。"
     else
       if @plan.save
           redirect_to @plan, notice: "「#{@plan.name}」を登録しました。"
@@ -55,7 +66,7 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :description, :start_time, :end_time, :tag)
+    params.require(:plan).permit(:name, :description, :start_time, :end_time, :tag, :countdown)
   end
 
   def set_plan

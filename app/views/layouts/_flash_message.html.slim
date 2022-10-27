@@ -1,0 +1,5 @@
+.container
+  - if flash.notice.present?
+    .alert.alert-success= flash.notice
+  - if flash.alert.present?
+      .alert.alert-danger= flash.alert
